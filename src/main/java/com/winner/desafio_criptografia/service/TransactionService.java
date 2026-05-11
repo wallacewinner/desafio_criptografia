@@ -3,8 +3,11 @@ package com.winner.desafio_criptografia.service;
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
+import org.springframework.stereotype.Service;
+
 import com.winner.desafio_criptografia.model.Transaction;
 
+@Service
 public class TransactionService {
     private final Queue<Transaction> transactionQueue = new ConcurrentLinkedQueue<>();
 
