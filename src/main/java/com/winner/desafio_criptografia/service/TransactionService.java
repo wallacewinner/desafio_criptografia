@@ -26,6 +26,10 @@ public class TransactionService {
             });
     }
 
+    public java.util.List<Transaction> readAllTransactions() {
+        return transactionQueue.stream().toList();
+    }
+
     public void clearAllTransactions() {
         transactionQueue.clear();
     }
