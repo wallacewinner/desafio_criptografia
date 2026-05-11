@@ -1,7 +1,6 @@
 package com.winner.desafio_criptografia.dto;
 
 import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 public class TransactionDto {
@@ -9,13 +8,13 @@ public class TransactionDto {
     @NotNull
     private Long id;
 
-    @NotBlank
+    @NotNull
     private String userDocument;
 
-    @NotBlank
+    @NotNull
     private String creditCardToken;
 
-    @NotBlank
+    @NotNull
     @Min(0)
     private Long value;
 
