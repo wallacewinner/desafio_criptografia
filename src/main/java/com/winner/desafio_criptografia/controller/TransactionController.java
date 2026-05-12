@@ -29,21 +29,21 @@ public class TransactionController {
 
     @PostMapping
     public ResponseEntity<Void> createTransaction(
-            @RequestHeader(value = "Authentication", required = false) String authentication,
+            @RequestHeader(value = "Authentication", required = true) String authentication,
             @Valid @RequestBody TransactionDto request) {
         transactionService.addTransaction(new Transaction(
             request.getId().longValue(),
             request.getUserDocument(),
             request.getCreditCardToken(),
             request.getValue().longValue()
-        ));
+        ), authentication);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
     @GetMapping
     public ResponseEntity<List<Transaction>> readTransactions(
             @RequestHeader(value = "Authentication", required = false) String authentication) {
-        List<Transaction> transactions = transactionService.readAllTransactions();
+        List<Transaction> transactions = transactionService.readAllTransactions(authentication);
         return ResponseEntity.ok(transactions);
     }
 
