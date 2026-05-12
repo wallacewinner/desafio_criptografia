@@ -5,7 +5,6 @@ import jakarta.validation.constraints.NotNull;
 
 public class TransactionDto {
 
-    @NotNull
     private Long id;
 
     @NotNull

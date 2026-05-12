@@ -17,11 +17,19 @@ public class TransactionService {
     private final String SALT = KeyGenerators.string().generateKey();
     
     public void addTransaction(Transaction transaction, String authentication) {
+        transaction.setId(generateNextId());
         if (authentication != null) {
             transaction.setUserDocument(encryptString(transaction.getUserDocument(), authentication));
             transaction.setCreditCardToken(encryptString(transaction.getCreditCardToken(), authentication));
         }
         transactionQueue.add(transaction);
+    }
+
+    private Long generateNextId() {
+        return transactionQueue.stream()
+            .mapToLong(Transaction::getId)
+            .max()
+            .orElse(0L) + 1;
     }
 
     public void removeTransactionById(Long id) {

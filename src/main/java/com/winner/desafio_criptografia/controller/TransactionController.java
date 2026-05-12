@@ -32,7 +32,7 @@ public class TransactionController {
             @RequestHeader(value = "Authentication", required = true) String authentication,
             @Valid @RequestBody TransactionDto request) {
         transactionService.addTransaction(new Transaction(
-            request.getId().longValue(),
+            null, // ID será gerado automaticamente
             request.getUserDocument(),
             request.getCreditCardToken(),
             request.getValue().longValue()
