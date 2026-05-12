@@ -17,8 +17,8 @@ public class TransactionService {
     private final Queue<Transaction> transactionQueue = new ConcurrentLinkedQueue<>();
     
     public void addTransaction(Transaction transaction) {
-        transaction.setCreditCardToken("123");;
-        transaction.setUserDocument("123");;
+        transaction.setCreditCardToken(encryptString(transaction.getCreditCardToken()));;
+        transaction.setUserDocument(encryptString(transaction.getUserDocument()));;
         transactionQueue.add(transaction);
     }
 
@@ -45,6 +45,13 @@ public class TransactionService {
     }
 
     private String encryptString(String text) {
-        return "encrypted_" + creditCardToken;
+        return "encrypted_" + text;
+    }
+
+    private String decryptString(String encryptedText) {
+        if (encryptedText.startsWith("encrypted_")) {
+            return encryptedText.substring(10);
+        }
+        return encryptedText;
     }
 }
