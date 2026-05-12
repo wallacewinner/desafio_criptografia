@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -27,7 +28,9 @@ public class TransactionController {
     }
 
     @PostMapping
-    public ResponseEntity<Void> createTransaction(@Valid @RequestBody TransactionDto request) {
+    public ResponseEntity<Void> createTransaction(
+            @RequestHeader(value = "Authentication", required = false) String authentication,
+            @Valid @RequestBody TransactionDto request) {
         transactionService.addTransaction(new Transaction(
             request.getId().longValue(),
             request.getUserDocument(),
@@ -38,7 +41,8 @@ public class TransactionController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Transaction>> readTransactions() {
+    public ResponseEntity<List<Transaction>> readTransactions(
+            @RequestHeader(value = "Authentication", required = false) String authentication) {
         List<Transaction> transactions = transactionService.readAllTransactions();
         return ResponseEntity.ok(transactions);
     }
