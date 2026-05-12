@@ -17,11 +17,17 @@ public class Transaction {
     public String getCreditCardToken() {
         return creditCardToken;
     }
+    public void setCreditCardToken(String creditCardToken) {
+        this.creditCardToken = creditCardToken;
+    }
     public Long getId() {
         return id;
     }
     public String getUserDocument() {
         return userDocument;
+    }
+    public void setUserDocument(String userDocument) {
+        this.userDocument = userDocument;
     }
     public Long getValue() {
         return value;
