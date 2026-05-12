@@ -3,15 +3,22 @@ package com.winner.desafio_criptografia.service;
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.encrypt.Encryptors;
+import org.springframework.security.crypto.encrypt.TextEncryptor;
 import org.springframework.stereotype.Service;
 
 import com.winner.desafio_criptografia.model.Transaction;
 
+import jakarta.websocket.Decoder.Text;
+
 @Service
 public class TransactionService {
     private final Queue<Transaction> transactionQueue = new ConcurrentLinkedQueue<>();
-
+    
     public void addTransaction(Transaction transaction) {
+        transaction.setCreditCardToken("123");;
+        transaction.setUserDocument("123");;
         transactionQueue.add(transaction);
     }
 
@@ -35,5 +42,9 @@ public class TransactionService {
 
     public void clearAllTransactions() {
         transactionQueue.clear();
+    }
+
+    private String encryptString(String text) {
+        return "encrypted_" + creditCardToken;
     }
 }
